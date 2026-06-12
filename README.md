@@ -1,5 +1,7 @@
 # factory-howick-driver
 
+<https://github.com/joeblew999/factory-howick-driver>
+
 The **Howick FRAMA** machine driver — the first driver in the `factory-` family.
 Runs at the edge (a Raspberry Pi wired to the machine), translates the machine's
 native protocol to the standard machine model, and presents it to the gateway.
