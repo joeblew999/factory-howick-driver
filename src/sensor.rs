@@ -8,15 +8,15 @@
 
 /// Read the current coil weight in kg, or `None` if no sensor source is present.
 pub fn read_weight_kg() -> Option<f64> {
-    if let Ok(val) = std::env::var("COIL_WEIGHT_KG") {
-        if let Ok(kg) = val.trim().parse::<f64>() {
-            return Some(kg);
-        }
+    if let Ok(val) = std::env::var("COIL_WEIGHT_KG")
+        && let Ok(kg) = val.trim().parse::<f64>()
+    {
+        return Some(kg);
     }
-    if let Ok(contents) = std::fs::read_to_string("/tmp/coil_weight_kg") {
-        if let Ok(kg) = contents.trim().parse::<f64>() {
-            return Some(kg);
-        }
+    if let Ok(contents) = std::fs::read_to_string("/tmp/coil_weight_kg")
+        && let Ok(kg) = contents.trim().parse::<f64>()
+    {
+        return Some(kg);
     }
     None
 }

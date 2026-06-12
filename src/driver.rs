@@ -80,10 +80,10 @@ impl MachineDriver for HowickFrama {
             PIECES_PRODUCED.to_owned(),
             Value::UInt(self.pieces_produced.load(Ordering::Relaxed)),
         );
-        if self.config.coil_sensor {
-            if let Some(kg) = sensor::read_weight_kg() {
-                t.insert(COIL_REMAINING.to_owned(), Value::Double(self.config.coil_metres(kg)));
-            }
+        if self.config.coil_sensor
+            && let Some(kg) = sensor::read_weight_kg()
+        {
+            t.insert(COIL_REMAINING.to_owned(), Value::Double(self.config.coil_metres(kg)));
         }
         Ok(t)
     }
