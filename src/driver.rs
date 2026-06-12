@@ -109,6 +109,17 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn runs_a_real_howick_cutlist_fixture() {
+        let csv = include_str!("../fixtures/T1.csv");
+        assert!(csv.starts_with("UNIT,MILLIMETRE"), "fixture is a Howick cut-list");
+        let d = driver();
+        let job = JobOrder::with_payload("T1", "CutListCsv", csv.as_bytes().to_vec());
+        d.run_job(&job).await.unwrap();
+        let written = std::fs::read_to_string(d.config.usb_mount.join("T1.csv")).unwrap();
+        assert_eq!(written, csv, "the real cut-list reaches the machine verbatim");
+    }
+
+    #[tokio::test]
     async fn runs_a_job_and_counts_a_piece() {
         let d = driver();
         assert_eq!(d.state().await, MachineryItemState::NotExecuting);
