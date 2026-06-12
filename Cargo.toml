@@ -1,0 +1,14 @@
+[package]
+name = "factory-howick-driver"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Howick FRAMA machine driver for factory-gateway — implements the factory-machine-model MachineDriver contract"
+repository = "https://github.com/joeblew999/factory-howick-driver"
+
+[dependencies]
+factory-machine-model = { git = "https://github.com/joeblew999/factory-machine-model" }
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["fs", "process", "time", "rt", "macros"] }
+tracing = "0.1"
